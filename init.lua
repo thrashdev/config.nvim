@@ -161,8 +161,8 @@ vim.opt.hlsearch = true
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 --
-vim.keymap.set('n', 'cw', 'ciw', { silent = True })
-
+vim.keymap.set('n', 'cw', 'ciw', { silent = true })
+vim.keymap.set('n', 'dw', 'diw', { silent = true })
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
@@ -178,8 +178,10 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- My Personal Keymaps
---
 vim.keymap.set('i', '<C-s>', vim.lsp.buf.signature_help)
+vim.keymap.set('n', '<S-j>', '5j')
+vim.keymap.set('n', '<S-k>', '5k')
+vim.keymap.set('n', '<S-K>', '5k')
 -- TIP: Disable arrow keys in normal mode
 -- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
 -- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
@@ -708,6 +710,7 @@ require('lazy').setup({
     },
     config = function()
       -- See `:help cmp`
+      require('luasnip.loaders.from_lua').load { paths = '/snippets' }
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
       luasnip.config.setup {}
@@ -741,7 +744,7 @@ require('lazy').setup({
 
           -- If you prefer more traditional completion keymaps,
           -- you can uncomment the following lines
-          ['<Tab>'] = cmp.mapping.confirm { select = true },
+          -- ['<Tab>'] = cmp.mapping.confirm { select = true },
           -- ['<Tab>'] = cmp.mapping.select_next_item(),
           -- ['<S-Tab>'] = cmp.mapping.select_prev_item(),
 
